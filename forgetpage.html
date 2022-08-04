@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <title>Reset your password</title>
+  <link rel="stylesheet" href="forgetstyle.css">
+  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+    integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0"
+    crossorigin="anonymous"></script>
+
+</head>
+
+<body>
+  <div class="center">
+    <br>
+    <h4 style="color: green;text-align: center;">Welcome! Create Password</h4>
+
+    <form id="form2">
+      <div class="txt_field">
+        <input type="password" required id="p1" class="form-control" placeholder="New password-abc@123">
+        <small id="passvalid" class="form-text text-muted invalid-feedback"></small>
+      </div>
+      <div class="txt_field">
+        <input type="password" required id="p2" class="form-control" placeholder="New Confirm Password">
+        <small id="passvalid" class="form-text text-muted invalid-feedback"></small>
+      </div>
+      <div class="field btn">
+        <div class="btn-layer"></div>
+        <input type="submit" value="Click Here" onclick="mypage()" style="font-weight: bolder; font-size: 25px;">
+      </div>
+      <br><br>
+      <h5 id="output1" style="text-align: center;"></h5><br><br>
+    </form>
+  </div>
+</body>
+<script>
+  const passw = document.getElementById('p1');
+  passw.addEventListener('blur', () => {
+    let regex = /^([A-Za-z]+)@([0-9]){2,10}$/;
+    let str = passw.value;
+    console.log(regex, str);
+    if (regex.test(str)) {
+      console.log('Your pass is valid');
+      passw.classList.remove('is-invalid');
+      var pass1 = document.getElementById('p1').value;
+      sessionStorage.setItem("Pass1", pass1);
+    }
+    else {
+      console.log('Your pass is not valid');
+      passw.classList.add('is-invalid');
+    }
+  });
+  function mypage() {
+    var email2 = sessionStorage.getItem("Pass1");
+    var pass3 = document.getElementById("p2").value;
+    if (email2 == pass3) {
+      window.location.replace("welcomepage.html")
+      sessionStorage.setItem("Cpass", pass3);
+    }
+    else {
+      document.getElementById("output1").style.color = "red";
+      document.getElementById("output1").innerHTML = "Please Enter valid data..";
+    }
+  };
+  var form = document.getElementById('form2');
+  form.addEventListener('submit', function (event) {
+    event.preventDefault();
+  });
+</script>
+
+</html>
